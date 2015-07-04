@@ -2,7 +2,7 @@ import json
 
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
-
+from app.models import Story
 
 def home(request):
     search = request.GET.get('search', None)
@@ -11,9 +11,25 @@ def home(request):
 
 def api(request):
     search = request.GET.get('search', None)
+    limit = request.GET.get('limit', 10)
     if search:
         print search
 
+    story_list = Story.objects.all().order_by('-date')[:limit] 
+
+    story_dicts = [{
+        'title': s.title
+        , 'url': s.url
+        , 'date': s.date.strftime('%d/%m/%Y')
+        , 'primary_image': s.primary_image
+        , 'subjects': s.subjects
+        , 'latitude': s.location.coords[0]
+        , 'longitude': s.location.coords[1] 
+    } for s in story_list]
+
+    return HttpResponse(json.dumps(story_dicts), content_type="application/json")
+
+"""
     mock = [{
         'title': 'Mittagong Greeny Flat shows eco-living made easy',
         'url': 'http://www.abc.net.au/local/photos/2014/05/26/4012255.htm',
@@ -40,5 +56,4 @@ def api(request):
         'latitude': -64.4516,
         'longitude': 170.4445
     }]
-
-    return HttpResponse(json.dumps(mock), content_type="application/json")
+"""

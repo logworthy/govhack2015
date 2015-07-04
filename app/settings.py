@@ -18,6 +18,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,7 +58,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': private.DB_NAME,
         'USER': private.DB_USER,
-        'PASSWORD': private.DB_PASSWORD,
+        'PASSWORD': private.DB_PASS,
         'HOST': private.DB_HOST
     }
 }

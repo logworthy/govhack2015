@@ -75,7 +75,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "app/assets"),
+    os.path.join(BASE_DIR, "app/templates/static"),
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")

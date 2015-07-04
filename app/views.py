@@ -13,9 +13,9 @@ def api(request):
     search = request.GET.get('search', None)
     limit = request.GET.get('limit', 10)
     if search:
-        print search
-
-    story_list = Story.objects.all().order_by('-date')[:limit] 
+        story_list = Story.objects.search(search)[:limit]
+    else:
+        story_list = Story.objects.all().order_by('-date')[:limit]
 
     story_dicts = [{
         'title': s.title

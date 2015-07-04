@@ -27,46 +27,47 @@
 
     {% verbatim %}
     <div class="container">
-      <div class="header clearfix">
-
-        <div class="row">
-          <div class="col-md-4">
-            <img src="/static/OurLocalStories_Logo2.png" />
-          </div>
-          <div class="col-md-8" id="side-logo">
-            <img src="/static/Header_05.png" />
-          </div>
+      <div class="row" id="heading">
+        <div class="col-md-4">
+          <img src="/static/OurLocalStories_Logo2.png" />
         </div>
-
+        <div class="col-md-8" id="side-logo">
+          <img src="/static/Header_05.png" />
+        </div>
       </div>
 
       <div class="row" id="search">
         <div class="col-md-12">
           <form ng-submit="search()">
-            <input type="text" ng-model="query" class="form-control" placeholder="I want to know about..." ng-keyup="search()">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon"><img src="/static/Search.png" /></div>
+                <input type="text" ng-model="query" class="form-control" placeholder="I want to know about..." ng-keyup="search()">
+              </div>
+            </div>
           </form>
         </div>
       </div>
 
-      <div id="main" ng-if="!loading && articles">
-        <div class="row">
-          <div class="col-md-4">
+      <div class="row" id="main" ng-if="!loading && articles">
+        <div class="col-md-4">
 
-            <div class="panel panel-default" ng-repeat="article in articles">
-              <div class="panel-body">
-                <a href="{{article.url}}">
-                  <h4 ng-bind="article.title"><small ng-bind="article.date"></small></h4>
-                </a>
-
-                <img ng-src="{{article.primary_image}}" width=200 />
-              </div>
+          <div class="panel panel-default" ng-repeat="article in articles">
+            <div class="panel-body">
+              <div class="thumbnail">
+                 <a href="{{article.url}}">
+                   <h4 ng-bind="article.title"><small ng-bind="article.date"></small></h4>
+                 </a>
+                <img ng-src="{{article.primary_image}}" width=300 />
+                <div class="caption" ng-bind="article.primary_image_caption"></div>
             </div>
-
           </div>
 
-          <div class="col-md-8">
-            MAP GOES HERE.
+          <div class="panel-footer">
           </div>
+        </div>
+
+        <div class="col-md-8">
         </div>
 
       </div>

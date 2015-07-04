@@ -96,6 +96,7 @@ def api(request):
         , 'url': s.url
         , 'date': s.date.strftime('%d/%m/%Y')
         , 'primary_image': s.primary_image
+        , 'primary_image_caption': s.primary_image_caption
         , 'subjects': s.subjects
         , 'latitude': s.location.coords[0]
         , 'longitude': s.location.coords[1] 

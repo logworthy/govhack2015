@@ -101,8 +101,10 @@ def api(request):
         , 'longitude': s.location.coords[1] 
     } for s in story_list]
 
-    # respond
-    return HttpResponse(json.dumps(story_dicts), content_type="application/json")
+    response = HttpResponse(
+        json.dumps(story_dicts), content_type="application/json")
+    response['Access-Control-Allow-Origin'] = '*'
+    return response
 
 """
     mock = [{

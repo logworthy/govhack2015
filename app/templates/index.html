@@ -1,5 +1,6 @@
+{% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="mainApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,24 +15,35 @@
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
 
   </head>
 
-  <body>
+  <body ng-controller="MainCtrl">
 
     <div class="container">
       <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">About</a></li>
-          </ul>
-        </nav>
         <h3 class="text-muted">Our Local Stories</h3>
       </div>
 
-      <div class="jumbotron">
-        Stuff goes here!
+      <div class="row" id="search">
+        <div class="col-md-12">
+          <input type="text" class="form-control" placeholder="I want to know about...">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              Story goes here.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          MAP GOES HERE.
+        </div>
       </div>
         
       <footer class="footer">

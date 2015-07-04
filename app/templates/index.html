@@ -1,4 +1,5 @@
 {% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en" ng-app="mainApp">
   <head>
@@ -17,10 +18,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{% static 'main.css' %}">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+    <script src="{% static 'main.js' %}"></script>
+
   </head>
 
   <body ng-controller="MainCtrl">
 
+    {% verbatim %}
     <div class="container">
       <div class="header clearfix">
         <h3 class="text-muted">Our Local Stories</h3>
@@ -28,31 +33,48 @@
 
       <div class="row" id="search">
         <div class="col-md-12">
-          <input type="text" class="form-control" placeholder="I want to know about...">
+          <form ng-submit="search()">
+            <input type="text" ng-model="query" class="form-control" placeholder="I want to know about..." ng-keyup="search()">
+          </form>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-4">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              Story goes here.
+      <div id="main" ng-if="!loading && articles">
+        <div class="row">
+          <div class="col-md-4">
+
+            <div class="panel panel-default" ng-repeat="article in articles">
+              <div class="panel-body">
+                <a href="{{article.url}}">
+                  <h4 ng-bind="article.title"><small ng-bind="article.date"></small></h4>
+                </a>
+
+                <img ng-src="{{article.primary_image}}" width=200 />
+              </div>
             </div>
+
+          </div>
+
+          <div class="col-md-8">
+            MAP GOES HERE.
           </div>
         </div>
 
-        <div class="col-md-8">
-          MAP GOES HERE.
+      </div>
+
+      <div id="main_loading" ng-if="loading">
+        <div class="row">
+          <div class="col-md-12">
+            <img src="/static/ajax-loader.gif"></img>
+          </div>
         </div>
       </div>
-        
-      <footer class="footer">
-        <p>&copy; Company 2015</p>
-      </footer>
-
     </div> <!-- /container -->
+    {% endverbatim %}
     <!-- Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    
 
   </body>
 </html>

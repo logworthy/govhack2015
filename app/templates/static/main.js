@@ -1,3 +1,5 @@
+var apiUrl = "http://api.ourlocalstories.co"
+
 var mainApp = angular.module('mainApp', ['uiGmapgoogle-maps'])
 
 .value("rndAddToLatLon", function () {
@@ -31,7 +33,7 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
       $scope.loading = true;
 
       $http({
-        url: '/api/',
+        url: apiUrl,
         params: {search: $scope.query},
         method: 'GET'
       })
@@ -39,10 +41,11 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
           for (var i=0;i<data.length;i++){
             data[i].id=i+1;
           }
-          console.log("success", data);
+
           mapInit(data);
           $scope.articles = data;
           $scope.loading = false;
+
         })
         .error(function(data, status, headers, config) {
           console.log(data);
@@ -69,7 +72,7 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
   }
 
   function mainInit(){
-    $http.get('http://ourlocalstories.co/api/').
+    $http.get(apiUrl).
     success(function(data, status, headers, config) {
           }).
     error(function(data, status, headers, config) {

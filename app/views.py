@@ -1,7 +1,6 @@
 import json
 
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
 from app.models import Story
 from datetime import datetime as dt
 from django.core.exceptions import SuspiciousOperation
@@ -11,8 +10,7 @@ import datetime
 RESULTS_HARD_LIMIT = 100
 
 def home(request):
-    search = request.GET.get('search', None)
-    return render_to_response('index.html')
+    return HttpResponse(open('./app/templates/index.html').read())
 
 
 def api(request):

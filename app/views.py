@@ -1,8 +1,19 @@
 import json
 
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
+
+
+def home(request):
+    search = request.GET.get('search', None)
+    return render_to_response('index.html')
+
 
 def api(request):
+    search = request.GET.get('search', None)
+    if search:
+        print search
+
     mock = [{
         'title': 'Mittagong Greeny Flat shows eco-living made easy',
         'url': 'http://www.abc.net.au/local/photos/2014/05/26/4012255.htm',

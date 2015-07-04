@@ -70,3 +70,26 @@
   border: 0px;
   color: #fff;
 }
+
+.angular-google-map-container {
+    width: 100%;
+    height: 600px;
+}
+
+/* fix for Twitter Bootstrap handling of responsive images */
+.angular-google-map img {
+    max-width: none;
+}
+
+.angular-google-map {
+    top: 80px;
+}
+
+/** FIX for Bootstrap and Google Maps Info window styes problem **/
+img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
+  max-width: none;
+}
+
+.angular-google-map {
+  display: block;
+}

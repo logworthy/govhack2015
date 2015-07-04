@@ -55,7 +55,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': private.DB_NAME,
         'USER': private.DB_USER,
         'PASSWORD': private.DB_PASS,

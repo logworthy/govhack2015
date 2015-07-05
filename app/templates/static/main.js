@@ -204,10 +204,9 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
     console.log("id", model.id);
     $scope.sideBarToggle = false;
     $timeout(function() {
+      pushToTop(model.id);
       $scope.sideBarToggle =true;
     }, 300);
-
-    pushToTop(model.id);
   };
 
   function pushToTop(id){

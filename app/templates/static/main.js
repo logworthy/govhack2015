@@ -24,6 +24,7 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
   $scope.loading = true;
   $scope.articles = [];
   $scope.query = "";
+  $scope.year = "";
   $scope.searchToggle = false;
   $scope.activeArticle = null;
 
@@ -51,9 +52,23 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
   };
 
   $scope.search = function(params) {
+    var start = null;
+    var end = null;
+
     if (!params) {
-      var params = {search: $scope.query};
+      if ($scope.year) {
+        start = $scope.year + "-01-01";
+        end = (parseInt($scope.year) + 1) + "-01-01";
+      };
+
+      var params = {
+        search: $scope.query,
+        start: start,
+        end: end
+      };
     };
+
+    params['limit'] = 100;
 
     $timeout.cancel(timeoutPromise);
 

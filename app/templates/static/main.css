@@ -38,11 +38,16 @@ a{
   text-align: center
 }
 
-#search{
-  height:55px;
+#search {
+  height: 60px;
   margin-bottom: 20px;
+  background-color: #00b0b2;
+  padding-top: 4px;
 }
 
+#search select {
+  font-size: 20px;
+}
 
 #search input {
    font-size: 20px;
@@ -50,7 +55,6 @@ a{
 }
 
 #search .col-xs-10, #search .col-xs-2{
-   background-color: #00b0b2;
    padding-top: 10px;
 }
 
@@ -63,8 +67,13 @@ a{
   right:0;
 }
 
-#search .input-group-addon img{
+#search .input-group-addon img {
   height:20px;
+}
+
+#search .input-group-addon {
+  background-color: #00b0b2;
+  border: 0;
 }
 
 .close{
@@ -213,6 +222,26 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
 
 .angular-google-map {
   display: block;
+}
+
+
+/***********************
+Typography
+***********************/
+@font-face {
+	font-family: Code-Light;
+	font-style: normal;
+	font-weight: normal;
+	src: url(codelight.otf);
+}
+
+body,
+button,
+input,
+select,
+textarea {
+	color: #000000;
+	font-family: Code-Light;
 }
 
 .modal-header {

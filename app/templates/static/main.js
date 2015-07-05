@@ -24,7 +24,7 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
   $scope.loading = true;
   $scope.articles = [];
   $scope.query = "";
-  $scope.searchToggle = true;
+  $scope.year = "";
   $scope.activeArticle = null;
   $scope.sideBarToggle = true;
 
@@ -41,7 +41,32 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
     });
 
 
-  $scope.search = function() {
+  $scope.searchNearby = function(article) {
+    $scope.query = null;
+    $scope.search({
+      point: article.latitude + "," + article.longitude,
+      distance: 300});
+  };
+
+  $scope.search = function(params) {
+    var start = null;
+    var end = null;
+
+    if (!params) {
+      if ($scope.year) {
+        start = $scope.year + "-01-01";
+        end = (parseInt($scope.year) + 1) + "-01-01";
+      };
+
+      var params = {
+        search: $scope.query,
+        start: start,
+        end: end
+      };
+    };
+
+    params['limit'] = 100;
+
     $timeout.cancel(timeoutPromise);
 
     timeoutPromise = $timeout(function() {
@@ -49,7 +74,7 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
 
       $http({
         url: apiUrl,
-        params: {search: $scope.query},
+        params: params,
         method: 'GET'
       })
         .success(function(data, status, headers, config) {

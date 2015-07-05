@@ -25,59 +25,31 @@
         </div>
       </div>
 
-      <div class="row" id="nav">
-        <div class="col-xs-4">
-          <a>
-            <div class="image-box">
-              <img src="/static/Share_Button.png">
-            </div>
-            FILTER
-          </a>
-        </div>
-        <div class="col-xs-4">
-          <a ng-click="searchToggle=!searchToggle">
-            <div class="image-box">
-              <img src="/static/Search_Button.png">
-            </div>
-            SEARCH
-          </a>
-        </div>
-        <div class="col-xs-4">
-          <a>
-            <div class="image-box">
-              <img src="/static/Login_Button.png">
-            </div>
-            <div id="login-div">LOGIN</div>
-          </a>
-        </div>
-      </div>
-      <div class="row" id="tabs">
-        <div class="col-xs-4">
-          KEYWORD
-        </div>
-        <div class="col-xs-4">
-          LOCATION
-        </div>
-        <div class="col-xs-4">
-          TIME LINE
-        </div>
-      </div>
       <div class="row" id="search">
-        <div class="col-xs-10" ng-show="searchToggle">
-          <form ng-submit="search()">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-addon"><img src="/static/Search.png" /></div>
-                <input type="text" ng-model="query" class="form-control" placeholder="I want to know about..." ng-keyup="search()">
-              </div>
+        <form ng-submit="search()">
+
+        <div class="col-xs-10">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon"><img src="/static/Search.png" /></div>
+              <input type="text" ng-model="query" class="form-control" placeholder="I want to know about..." ng-keyup="search()">
             </div>
-          </form>
+          </div>
         </div>
-        <div class="col-xs-2" id="search-close" ng-show="searchToggle">
-          <a ng-click="searchToggle=false" class="close"></a>
+
+        <div class="col-xs-2" id="search-close">
+          <select class="form-control" ng-model="year" ng-change="search()">
+            <option value="">All time</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+            <option value="2011">2011</option>
+            <option value="2010">2010</option>
+            <option value="2009">2009</option>
+          </select>
         </div>
-      </div>
-      <div>
+
+        </form>
 
       </div>
 
@@ -136,9 +108,11 @@
               <div id="article-main-body">
                 <img ng-src="{{activeArticle.primary_image}}" class="thumbnail" width="100%" />
                 <div class="caption">
-                  <a ng-href="{{activeArticle.url}}"></a>
-                  <h3 ng-bind="makeTitle(activeArticle)"></h3>
+                  <a ng-href="{{activeArticle.url}}">
+                    <h3 ng-bind="activeArticle.title"></h3>
+                  </a>
                   <p ng-bind="activeArticle.primary_image_caption"></div>
+                  <p><a href="#" class="btn" role="button" ng-click="searchNearby(activeArticle)" data-dismiss="modal"><img src="/static/AroundMe.png"/>Find Articles Nearby</a></p>
                 </div>
               </div>
             </div>

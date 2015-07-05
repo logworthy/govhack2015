@@ -93,3 +93,22 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
 .angular-google-map {
   display: block;
 }
+
+/***********************
+Typography
+***********************/
+@font-face {
+	font-family: Code-Light;
+	font-style: normal;
+	font-weight: normal;
+	src: url(codelight.otf);
+}
+
+body,
+button,
+input,
+select,
+textarea {
+	color: #000000;
+	font-family: Code-Light;
+}

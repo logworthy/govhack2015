@@ -1,3 +1,5 @@
+@import url("//hello.myfonts.net/count/2e980e");
+
 a{
   cursor: pointer;
 }
@@ -204,22 +206,30 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
 /***********************
 Typography
 ***********************/
+  
 @font-face {
-	font-family: Code-Light;
-	font-style: normal;
-	font-weight: normal;
-	src: url(codelight.otf);
+	font-family: 'Code-Pro-Light-LC';
+	src: url('/static/webfonts/2E980E_0_0.eot');
+	src: url('/static/webfonts/2E980E_0_0.eot?#iefix') format('embedded-opentype'),
+	url('/static/webfonts/2E980E_0_0.woff2') format('woff2'),
+	url('/static/webfonts/2E980E_0_0.woff') format('woff'),
+	url('/static/webfonts/2E980E_0_0.ttf') format('truetype');
 }
-
+	 
 body,
 button,
 input,
 select,
 textarea {
 	color: #000000;
-	font-family: Code-Light;
+	font-family: Code-Pro-Light-LC;
 }
 
 .modal-header {
   border-bottom: 0;
+}
+
+.footer {
+  margin-top: 10px;
+  text-align: center;
 }

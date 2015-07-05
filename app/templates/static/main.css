@@ -176,6 +176,7 @@ a{
   border: 0px;
   color: #fff;
   display:none;
+  padding-left: 0;
 }
 
 
@@ -186,7 +187,9 @@ a{
 
 #main .panel .thumbnail img {
   display:none;
+  margin-left: 0;
 }
+
 #main .panel:first-child .thumbnail img {
   display:block;
 }

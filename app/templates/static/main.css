@@ -1,20 +1,81 @@
-#search {
+a{
+  cursor: pointer;
+}
+
+#header-image{
+  width:100%;
+}
+
+#nav {
   margin-top: 20px;
+  margin-bottom: 20px;
+  position:relative;
+}
+
+
+
+#nav .image-box{
+  height:90px;
+}
+
+#nav .col-xs-4 {
+  text-align: center;
+}
+
+#login-div{
+  padding-right:10px;
+}
+
+#tabs{
+  background-color: #77a5c3;
+  height: 75px;
+  padding-top: 30px;
+  color: white;
   margin-bottom: 20px;
 }
 
+#tabs .col-xs-4{
+  text-align: center
+}
+
+#search{
+  height:55px;
+  margin-bottom: 20px;
+}
+
+
 #search input {
-   height: 60px;
    font-size: 20px;
    border: 0;
 }
 
-#search .col-md-12 {
+#search .col-xs-10, #search .col-xs-2{
    background-color: #00b0b2;
-   padding-top: 16px;
+   padding-top: 10px;
 }
 
-#search .input-group-addon {
+#search .form-group{
+  margin-bottom: -3px;
+}
+
+#search .col-xs-2{
+  height:55px;
+  right:0;
+}
+
+#search .input-group-addon img{
+  height:20px;
+}
+
+.close{
+  display:block;
+  width:20px;
+  height:20px;
+  opacity:1;
+  background-color:white;
+}
+
+#nav .input-group-addon {
    border: 0;
    background-color: #00b0b2;
 }
@@ -25,24 +86,28 @@
   text-align: center;
 }
 
-#heading .col-md-4 {
+#heading .col-xs-4, #heading .col-md-4 {
   padding-left: 0px;
 }
 
-#heading .col-md-8 {
+#heading .col-xs-8, #heading .col-md-8 {
   margin-top: 40px;
 }
 
-#main .col-md-4 {
+#main .col-xs-4, #main .col-md-4 {
   padding-left: 0px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  height:600px;
 }
 
 #main .panel-body {
-  background-color: #00527b;
+  background-color: #77a5c3;
 }
 
 #main .panel {
   border: 0;
+  box-shadow: none;
 }
 
 #main .panel-body a {
@@ -58,18 +123,49 @@
    border-top: 0px;
 }
 
+
+
 #main .thumbnail {
-  background-color: #00527b;
+  background-color: #77a5c3;
   border: 0px;
   color: #fff;
   margin-bottom: 0px;
+  box-shadow: none;
 }
+
+
+#main .panel:first-child .panel-body, #main .panel:first-child .thumbnail{
+  background-color: #00527b;
+}
+
+#main .panel:first-child:after{
+  content: url("/static/Pointer.png");
+  text-align: right;
+  display:block;
+  margin-right:20px;
+}
+
 
 #main .thumbnail .caption {
   background-color: #00527b;
   border: 0px;
   color: #fff;
+  display:none;
 }
+
+
+#main .panel:first-child .thumbnail .caption {
+  display:block;
+}
+
+
+#main .panel .thumbnail img {
+  display:none;
+}
+#main .panel:first-child .thumbnail img {
+  display:block;
+}
+
 
 .angular-google-map-container {
     width: 100%;
@@ -83,6 +179,7 @@
 
 .angular-google-map {
     top: 80px;
+    margin-right:-7.5px;
 }
 
 /** FIX for Bootstrap and Google Maps Info window styes problem **/
@@ -93,6 +190,7 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
 .angular-google-map {
   display: block;
 }
+
 
 /***********************
 Typography
@@ -111,4 +209,8 @@ select,
 textarea {
 	color: #000000;
 	font-family: Code-Light;
+}
+
+.modal-header {
+  border-bottom: 0;
 }

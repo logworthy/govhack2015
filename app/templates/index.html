@@ -59,6 +59,8 @@
             <div class="panel panel-default" ng-repeat="article in articles">
               <div class="panel-body">
                 <div class="thumbnail">
+                  <p ng-bind="article.date"></p>
+                  <hr>
                    <a data-toggle="modal" data-target="#article-modal" ng-click="fillModal(article)">
                      <h4 ng-bind="article.title"><small ng-bind="article.date"></small></h4>
                    </a>

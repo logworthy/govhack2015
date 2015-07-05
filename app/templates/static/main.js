@@ -20,11 +20,22 @@ var mainApp = angular.module('mainApp', ['uiGmapgoogle-maps'])
 
 mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', 'rndAddToLatLon','uiGmapGoogleMapApi'
         , function ($scope, $timeout, $log, $http, rndAddToLatLon,GoogleMapApi) {
-  $scope.loading = false;
+
+  $scope.loading = true;
   $scope.articles = [];
   $scope.query = "";
 
   var timeoutPromise;
+
+  $http.get(apiUrl).
+    success(function(data, status, headers, config) {
+      mapInit(data);
+      $scope.articles = data;
+      $scope.loading = false;
+    }).
+    error(function(data, status, headers, config) {
+      console.log("error", data);
+    });
 
   $scope.search = function() {
     $timeout.cancel(timeoutPromise);
@@ -38,21 +49,16 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
         method: 'GET'
       })
         .success(function(data, status, headers, config) {
-          for (var i=0;i<data.length;i++){
-            data[i].id=i+1;
-          }
-
-          mapInit(data);
           $scope.articles = data;
+          $scope.map.markers = data;
           $scope.loading = false;
-
         })
         .error(function(data, status, headers, config) {
-          console.log(data);
           $scope.loading = false;
         });
     }, 800);
   }
+
 
   $log.currentLevel = $log.LEVELS.debug;
 
@@ -63,23 +69,13 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
 
   });
 
-  mainInit("map");
-
   var onMarkerClicked = function (marker) {
     marker.showWindow = true;
     $scope.$apply();
     //window.alert("Marker: lat: " + marker.latitude + ", lon: " + marker.longitude + " clicked!!")
   }
 
-  function mainInit(){
-    $http.get(apiUrl).
-    success(function(data, status, headers, config) {
-          }).
-    error(function(data, status, headers, config) {
-      console.log("error", data);
-    });
-  }
-
+  
   function mapInit(data){
       angular.extend($scope, {
         example2: {

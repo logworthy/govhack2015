@@ -24,6 +24,7 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
   $scope.loading = true;
   $scope.articles = [];
   $scope.query = "";
+  $scope.searchToggle = false;
   $scope.activeArticle = null;
 
   var timeoutPromise;
@@ -94,7 +95,6 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
     //window.alert("Marker: lat: " + marker.latitude + ", lon: " + marker.longitude + " clicked!!")
   }
 
-  
   function mapInit(data){
       angular.extend($scope, {
         example2: {

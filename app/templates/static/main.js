@@ -25,7 +25,6 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
   $scope.articles = [];
   $scope.query = "";
   $scope.year = "";
-  $scope.searchToggle = false;
   $scope.activeArticle = null;
 
   var timeoutPromise;
@@ -40,9 +39,6 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
       console.log("error", data);
     });
 
-  $scope.makeTitle = function(article) {
-    return article.title + " (" + article.date + ")";
-  }
 
   $scope.searchNearby = function(article) {
     $scope.query = null;
@@ -132,7 +128,7 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
             maxZoom: 20,
             minZoom: 3
           },
-          zoom: 3,
+          zoom: 4,
           dragging: false,
           bounds: {},
           markers: data,
@@ -149,13 +145,13 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
             },
             click: function (mapModel, eventName, originalEventArgs) {
               // 'this' is the directive's scope
-              $log.info("user defined event: " + eventName, mapModel, originalEventArgs);
-              var e = originalEventArgs[0];
-              var lat = e.latLng.lat(),
-                lon = e.latLng.lng();
-              console.log("test", lat, lon);
+              // $log.info("user defined event: " + eventName, mapModel, originalEventArgs);
+              // var e = originalEventArgs[0];
+              // var lat = e.latLng.lat(),
+              //   lon = e.latLng.lng();
+              // console.log("test", lat, lon);
               //scope apply required because this event handler is outside of the angular domain
-              $scope.$apply();
+              //$scope.$apply();
             },
             zoom_changed: function (mapModel, eventName, originalEventArgs) {
               // 'this' is the directive's scope
@@ -165,7 +161,7 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
                 var southwest = mapModel.bounds.southwest;
                 var northeast = mapModel.bounds.northeast;
                 console.log("bounds", southwest.latitude, southwest.longitude, northeast.latitude, northeast.longitude);
-                searchSpaceBox(southwest.latitude, southwest.longitude, northeast.latitude, northeast.longitude);
+                //searchSpaceBox(southwest.latitude, southwest.longitude, northeast.latitude, northeast.longitude);
               }
               $scope.$apply();
             },
@@ -204,7 +200,21 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
   $scope.onMarkerClicked = onMarkerClicked;
 
   $scope.story = function (marker,eventName, model) {
-    $scope.getStory(model);
+    console.log("id", model.id);
+    pushToTop(model.id);
   };
+
+  function pushToTop(id){
+    var temp = $scope.articles[0];
+    var idNum = 0;
+    for(var i=0;i<$scope.articles.length;i++){
+      if($scope.articles[i].id===id){
+        $scope.articles[0]=$scope.articles[i];
+        idNum=i
+      }
+    }
+    $scope.articles[idNum]=temp;
+
+  }
 
 }]);

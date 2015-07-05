@@ -23,6 +23,7 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
   $scope.loading = false;
   $scope.articles = [];
   $scope.query = "";
+  $scope.searchToggle = false;
 
   var timeoutPromise;
 
@@ -63,7 +64,7 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
 
   });
 
-  mainInit("map");
+  //mapInit();
 
   var onMarkerClicked = function (marker) {
     marker.showWindow = true;
@@ -74,7 +75,8 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
   function mainInit(){
     $http.get(apiUrl).
     success(function(data, status, headers, config) {
-          }).
+      mapInit(data);
+    }).
     error(function(data, status, headers, config) {
       console.log("error", data);
     });

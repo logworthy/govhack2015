@@ -88,6 +88,7 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
       })
         .success(function(data, status, headers, config) {
           console.log("data", data);
+          addIcons(data);
           if(data.length===0){
             $scope.articles = [{
               title:"No results found",

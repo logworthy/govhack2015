@@ -2,11 +2,17 @@ a{
   cursor: pointer;
 }
 
+#header-image{
+  width:100%;
+}
+
 #nav {
   margin-top: 20px;
   margin-bottom: 20px;
   position:relative;
 }
+
+
 
 #nav .image-box{
   height:90px;
@@ -90,6 +96,9 @@ a{
 
 #main .col-xs-4, #main .col-md-4 {
   padding-left: 0px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  height:600px;
 }
 
 #main .panel-body {
@@ -98,6 +107,7 @@ a{
 
 #main .panel {
   border: 0;
+  box-shadow: none;
 }
 
 #main .panel-body a {

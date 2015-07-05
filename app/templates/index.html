@@ -14,9 +14,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/static/main.css">
-
-    
-
   </head>
 
   <body ng-controller="MainCtrl">
@@ -90,7 +87,7 @@
           <div class="panel panel-default" ng-repeat="article in articles">
             <div class="panel-body">
               <div class="thumbnail">
-                 <a href="{{article.url}}">
+                 <a data-toggle="modal" data-target="#article-modal" ng-click="fillModal(article)">
                    <h4 ng-bind="article.title"><small ng-bind="article.date"></small></h4>
                  </a>
                 <img ng-src="{{article.primary_image}}" width=300 />
@@ -125,6 +122,29 @@
           </div>
         </div>
       </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="article-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">&nbsp;</h4>
+            </div>
+            <div class="modal-body">
+              <div id="article-main-body">
+                <img ng-src="{{activeArticle.primary_image}}" class="thumbnail" width="100%" />
+                <div class="caption">
+                  <a ng-href="{{activeArticle.url}}"></a>
+                  <h3 ng-bind="makeTitle(activeArticle)"></h3>
+                  <p ng-bind="activeArticle.primary_image_caption"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div> <!-- /container -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>

@@ -180,3 +180,7 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
 .angular-google-map {
   display: block;
 }
+
+.modal-header {
+  border-bottom: 0;
+}

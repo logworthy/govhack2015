@@ -20,12 +20,28 @@ var mainApp = angular.module('mainApp', ['uiGmapgoogle-maps'])
 
 mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', 'rndAddToLatLon','uiGmapGoogleMapApi'
         , function ($scope, $timeout, $log, $http, rndAddToLatLon,GoogleMapApi) {
-  $scope.loading = false;
+
+  $scope.loading = true;
   $scope.articles = [];
   $scope.query = "";
   $scope.searchToggle = false;
+  $scope.activeArticle = null;
 
   var timeoutPromise;
+
+  $http.get(apiUrl).
+    success(function(data, status, headers, config) {
+      mapInit(data);
+      $scope.articles = data;
+      $scope.loading = false;
+    }).
+    error(function(data, status, headers, config) {
+      console.log("error", data);
+    });
+
+  $scope.makeTitle = function(article) {
+    return article.title + " (" + article.date + ")";
+  }
 
   $scope.search = function() {
     $timeout.cancel(timeoutPromise);
@@ -39,20 +55,18 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
         method: 'GET'
       })
         .success(function(data, status, headers, config) {
-          for (var i=0;i<data.length;i++){
-            data[i].id=i+1;
-          }
-
-          mapInit(data);
           $scope.articles = data;
+          $scope.map.markers = data;
           $scope.loading = false;
-
         })
         .error(function(data, status, headers, config) {
-          console.log(data);
           $scope.loading = false;
         });
     }, 800);
+  }
+
+  $scope.fillModal = function(article) {
+    $scope.activeArticle = article;
   }
 
   $log.currentLevel = $log.LEVELS.debug;
@@ -64,22 +78,10 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
 
   });
 
-  //mapInit();
-
   var onMarkerClicked = function (marker) {
     marker.showWindow = true;
     $scope.$apply();
     //window.alert("Marker: lat: " + marker.latitude + ", lon: " + marker.longitude + " clicked!!")
-  }
-
-  function mainInit(){
-    $http.get(apiUrl).
-    success(function(data, status, headers, config) {
-      mapInit(data);
-    }).
-    error(function(data, status, headers, config) {
-      console.log("error", data);
-    });
   }
 
   function mapInit(data){

@@ -46,7 +46,9 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
   function addIcons(data){
     for(var i=0;i<data.length;i++){
       if(data[i].primary_image)
-        data[i].icon="http://ourlocalstories.co:8082/unsafe/35x35/smart/"+data[i].primary_image;
+        data[i].icon="http://ourlocalstories.co:8082/unsafe/20x20/smart/"+data[i].primary_image;
+      else
+        data[i].icon="http://ourlocalstories.co:8082/unsafe/20x20/smart/http://ourlocalstories.co/static/marker.png"
     }
   }
 

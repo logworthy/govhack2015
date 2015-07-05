@@ -108,13 +108,14 @@
             </div>
             <div class="modal-body">
               <div id="article-main-body">
+                <h4 ng-bind="activeArticle.date"></h4>
                 <img ng-src="{{activeArticle.primary_image}}" class="thumbnail" width="100%" />
                 <div class="caption">
                   <a ng-href="{{activeArticle.url}}">
                     <h3 ng-bind="activeArticle.title"></h3>
                   </a>
                   <p ng-bind="activeArticle.primary_image_caption"></div>
-                  <p><a href="#" class="btn" role="button" ng-click="searchNearby(activeArticle)" data-dismiss="modal"><img src="/static/AroundMe.png"/>Find Articles Nearby</a></p>
+                  <p><a href="#" class="btn" role="button" ng-click="searchNearby(activeArticle)" data-dismiss="modal"><img src="/static/AroundMe.png"/>&nbsp;Nearby Articles</a></p>
                 </div>
               </div>
             </div>

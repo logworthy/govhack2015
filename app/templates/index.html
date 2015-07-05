@@ -55,15 +55,16 @@
 
       <div class="row" id="main" ng-if="!loading && articles">
         <div class="col-md-4">
-
-          <div class="panel panel-default" ng-repeat="article in articles">
-            <div class="panel-body">
-              <div class="thumbnail">
-                 <a data-toggle="modal" data-target="#article-modal" ng-click="fillModal(article)">
-                   <h4 ng-bind="article.title"><small ng-bind="article.date"></small></h4>
-                 </a>
-                <img ng-src="{{article.primary_image}}" width=300 />
-                <div class="caption" ng-bind="article.primary_image_caption"></div>
+          <div class="panel-container" ng-show="sideBarToggle">
+            <div class="panel panel-default" ng-repeat="article in articles">
+              <div class="panel-body">
+                <div class="thumbnail">
+                   <a data-toggle="modal" data-target="#article-modal" ng-click="fillModal(article)">
+                     <h4 ng-bind="article.title"><small ng-bind="article.date"></small></h4>
+                   </a>
+                  <img ng-src="{{article.primary_image}}" width=300 />
+                  <div class="caption" ng-bind="article.primary_image_caption"></div>
+                </div>
               </div>
             </div>
           </div>

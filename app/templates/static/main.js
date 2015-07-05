@@ -1,6 +1,6 @@
 var apiUrl = "http://api.ourlocalstories.co"
 
-var mainApp = angular.module('mainApp', ['uiGmapgoogle-maps'])
+var mainApp = angular.module('mainApp', ['uiGmapgoogle-maps', 'ngAnimate'])
 
 .value("rndAddToLatLon", function () {
   return Math.floor(((Math.random() < 0.5 ? -1 : 1) * 2) + 1);
@@ -26,6 +26,7 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
   $scope.query = "";
   $scope.year = "";
   $scope.activeArticle = null;
+  $scope.sideBarToggle = true;
 
   var timeoutPromise;
 
@@ -199,9 +200,13 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
 
   $scope.onMarkerClicked = onMarkerClicked;
 
-  $scope.story = function (marker,eventName, model) {
+  $scope.story = function (marker, eventName, model) {
     console.log("id", model.id);
-    pushToTop(model.id);
+    $scope.sideBarToggle = false;
+    $timeout(function() {
+      pushToTop(model.id);
+      $scope.sideBarToggle =true;
+    }, 300);
   };
 
   function pushToTop(id){

@@ -78,7 +78,15 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
         method: 'GET'
       })
         .success(function(data, status, headers, config) {
-          $scope.articles = data;
+          console.log("data", data);
+          if(data.length===0){
+            $scope.articles = [{
+              title:"No results found",
+              primary_image_caption: "Please try another search query"
+            }];
+          } else{
+            $scope.articles = data;
+          }
           $scope.map.markers = data;
           $scope.loading = false;
         })

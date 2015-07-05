@@ -24,6 +24,7 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
   $scope.loading = true;
   $scope.articles = [];
   $scope.query = "";
+  $scope.activeArticle = null;
 
   var timeoutPromise;
 
@@ -36,6 +37,10 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
     error(function(data, status, headers, config) {
       console.log("error", data);
     });
+
+  $scope.makeTitle = function(article) {
+    return article.title + " (" + article.date + ")";
+  }
 
   $scope.search = function() {
     $timeout.cancel(timeoutPromise);
@@ -59,6 +64,9 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
     }, 800);
   }
 
+  $scope.fillModal = function(article) {
+    $scope.activeArticle = article;
+  }
 
   $log.currentLevel = $log.LEVELS.debug;
 

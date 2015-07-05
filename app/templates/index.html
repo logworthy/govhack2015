@@ -95,9 +95,11 @@
               <div id="article-main-body">
                 <img ng-src="{{activeArticle.primary_image}}" class="thumbnail" width="100%" />
                 <div class="caption">
-                  <a ng-href="{{activeArticle.url}}"></a>
-                  <h3 ng-bind="makeTitle(activeArticle)"></h3>
+                  <a ng-href="{{activeArticle.url}}">
+                    <h3 ng-bind="activeArticle.title"></h3>
+                  </a>
                   <p ng-bind="activeArticle.primary_image_caption"></div>
+                  <p><a href="#" class="btn btn-default" role="button" ng-click="searchNearby(activeArticle)" data-dismiss="modal">Find Articles Nearby</a></p>
                 </div>
               </div>
             </div>

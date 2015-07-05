@@ -101,6 +101,30 @@ a{
   height:600px;
 }
 
+#main .panel-container.ng-hide{
+  opacity: 0;
+}
+#main .panel-container.ng-hide-add, #main .panel-container.ng-hide-remove {
+  /* this is required as of 1.3x to properly
+     apply all styling in a show/hide animation */
+  transition: 0s linear all;
+}
+#main .panel-container.ng-hide-add-active,
+#main .panel-container.ng-hide-remove-active {
+  /* the transition is defined in the active class */
+  -webkit-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -moz-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -ms-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -o-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+}
+
+#main .panel-container.ng-hide-add, #main .panel-container.ng-hide-remove-active{
+  opacity: 1;
+  display:block;
+}
+
+
 #main .panel-body {
   background-color: #77a5c3;
 }
@@ -133,10 +157,10 @@ a{
   box-shadow: none;
 }
 
-
 #main .panel:first-child .panel-body, #main .panel:first-child .thumbnail{
   background-color: #00527b;
 }
+
 
 #main .panel:first-child:after{
   content: url("/static/Pointer.png");

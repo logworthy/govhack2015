@@ -30,9 +30,12 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
 
   var timeoutPromise;
 
+
   $http.get(apiUrl).
     success(function(data, status, headers, config) {
+      addIcons(data);
       mapInit(data);
+
       $scope.articles = data;
       $scope.loading = false;
     }).
@@ -40,6 +43,12 @@ mainApp.controller('MainCtrl', ['$scope', '$timeout', 'uiGmapLogger', '$http', '
       console.log("error", data);
     });
 
+  function addIcons(data){
+    for(var i=0;i<data.length;i++){
+      if(data[i].primary_image)
+        data[i].icon="http://ourlocalstories.co:8082/unsafe/35x35/smart/"+data[i].primary_image;
+    }
+  }
 
   $scope.searchNearby = function(article) {
     $scope.query = null;
